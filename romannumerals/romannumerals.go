@@ -4,6 +4,14 @@ import (
 	"fmt"
 )
 
+func repStr(s string, n int) (res string) {
+	res = ""
+	for i := 0; i < n; i++ {
+		res = res + s
+	}
+	return res
+}
+
 func Decode(s string) (n int, ok bool) {
 	i := 0
 	n = 0
@@ -63,7 +71,57 @@ func Decode(s string) (n int, ok bool) {
 	return n,true
 }
 
-
+func Encode(n int) (s string, ok bool) {
+	if n < 0 {
+		return "",false
+	}
+	s = ""
+	for ; n >= 1000; {
+		n = n - 1000
+		s = s + "M"
+	}
+	if n >= 900 {
+		s = s + "CM"
+		n = n - 900
+	}
+	if n >= 500 {
+		s = s + "D"
+		n = n - 500
+	}
+	if n >= 400 {
+		s = s + "CD"
+		n = n - 400
+	}
+	k := int(n / 100)
+	n = n - 100*k
+	s = s + repStr("C",k)
+	if n >= 90 {
+		n = n - 90
+		s = s + "XC"
+	}
+	if n >= 50 {
+		n = n - 50
+		s = s + "L"
+	}
+	if n >= 40 {
+		n = n - 40
+		s = s + "XL"
+	}
+	k = int(n / 10)
+	s = s + repStr("X",k)
+	n = n - k*10
+	if n == 9 {
+		return s + "IX",true
+	}
+	if n >= 5 {
+		n = n - 5
+		s = s + "V"
+	}
+	if n == 4 {
+		return s + "IV",true
+	}
+	return s + repStr("I",n),true
+}
 
 func main() {
 	fmt.Println(Decode("I"))
@@ -80,5 +138,7 @@ func main() {
 	fmt.Println(Decode("DCXXXIV"))
 	fmt.Println(Decode("MMDCCXIV"))
 	fmt.Println(Decode("MMMCD"))
-		
+
+	fmt.Println("\n  Encode test \n")
+	fmt.Println(Encode(3943))
 }
