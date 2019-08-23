@@ -1,0 +1,45 @@
+Assignment name  : roman numerals
+Expected files   : romannumerals.go
+Allowed functions: Encode, Decode
+--------------------------------------------------------------------------------
+
+Create 2 functions:
+Encode - takes an integer as its parameter and returns a string containing the Roman numeral representation of that integer.
+Decode - takes a Roman numeral as its argument and returns its value as a numeric decimal integer.
+Second bool parameter must be false if Encode/Decode is unable.
+
+Example: 
+// MCMXC, true
+Encode(1990)
+
+// 2008, true
+Decode("MMVIII")
+
+For encode:
+	{"", -1, false},
+	{"", 0, false},
+	{"I", 1, true},
+	{"XVIII", 18, true},
+	{"XXXVIII", 38, true},
+	{"CX", 110, true},
+	{"CXXXVIII", 138, true},
+	{"CCCLXVI", 366, true},
+	{"DCXXXIV", 634, true},
+	{"MMDCCXIV", 2714, true},
+	{"MMMCD", 3400, true},
+
+For decode: 
+    {"I", 1, true},
+	{"", 0, false},
+	{"1", 0, false},
+	{"T", 0, false},
+	{"X X X", 0, false},
+	{"X0", 0, false},
+	{"XVIII", 18, true},
+	{"XXXVIII", 38, true},
+	{"CX", 110, true},
+	{"CXXXVIII", 138, true},
+	{"CCCLXVI", 366, true},
+	{"DCXXXIV", 634, true},
+	{"MMDCCXIV", 2714, true},
+	{"MMMCD", 3400, true},
